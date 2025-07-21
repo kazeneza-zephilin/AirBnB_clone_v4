@@ -42,6 +42,17 @@ def hbnb_filters(the_id=None):
                            cache_id=cache_id)
 
 
+@app.route('/100-hbnb/place/<place_id>')
+def place_detail(place_id):
+    """
+    handles request to individual place detail page
+    """
+    cache_id = (str(uuid.uuid4()))
+    return render_template('place-detail.html',
+                           place_id=place_id,
+                           cache_id=cache_id)
+
+
 if __name__ == "__main__":
     """
     MAIN Flask App"""

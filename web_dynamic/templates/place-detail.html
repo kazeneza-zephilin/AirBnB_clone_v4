@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<HTML lang="en">
+  <HEAD>
+    <!-- HEAD -->
+    <META charset="utf-8">
+    <META name="viewport" content="width=device-width">
+    <TITLE>Property Details - HolbertonBnB</TITLE>
+
+    <!-- FAVICON -->
+    <LINK rel="shortcut icon" href="{{ url_for('static', filename='images/icon.png') + '?' + cache_id }}">
+
+    <!-- CSS styles -->
+    <LINK rel="stylesheet" href="{{ url_for('static', filename='styles/4-common.css') + '?' + cache_id }}">
+    <LINK rel="stylesheet" href="{{ url_for('static', filename='styles/3-header.css') + '?' + cache_id }}">
+    <LINK rel="stylesheet" href="{{ url_for('static', filename='styles/3-footer.css') + '?' + cache_id }}">
+    <LINK rel="stylesheet" href="{{ url_for('static', filename='styles/font-awesome.css') + '?' + cache_id }}">
+    <LINK rel="stylesheet" href="{{ url_for('static', filename='styles/place-detail.css') + '?' + cache_id }}">
+
+    <!-- jQUERY -->
+    <SCRIPT src="https://code.jquery.com/jquery-3.2.1.min.js"></SCRIPT>
+    <SCRIPT src="{{ url_for('static', filename='scripts/place-detail.js') + '?' + cache_id }}"></SCRIPT>
+  </HEAD>
+
+  <BODY>
+    <!-- HEADER -->
+    <HEADER>
+      <DIV id="api_status" class="available"></DIV>
+    </HEADER>
+
+    <MAIN>
+      <DIV class="container">
+        <!-- Back button -->
+        <DIV class="back-section">
+          <BUTTON class="back-btn" onclick="window.history.back()">
+            <I class="fa fa-arrow-left"></I> Back to listings
+          </BUTTON>
+        </DIV>
+
+        <!-- Place detail content will be loaded here -->
+        <DIV id="place-detail-container" data-place-id="{{ place_id }}">
+          <DIV class="loading-spinner">
+            <I class="fa fa-spinner fa-spin fa-2x"></I>
+            <P>Loading property details...</P>
+          </DIV>
+        </DIV>
+      </DIV>
+    </MAIN>
+
+    <!-- FOOTER -->
+    <FOOTER>
+      Holberton School
+    </FOOTER>
+  </BODY>
+</HTML>
