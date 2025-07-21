@@ -63,17 +63,21 @@ class Place(BaseModel, Base):
                 getter for amenitiess list, i.e. amenities attribute of self
             """
             if len(self.amenity_ids) > 0:
-                return amenity_ids
+                return self.amenity_ids
             else:
                 return None
 
         @amenities.setter
-        def amenities(self, amenity_obj):
+        def amenities(self, amenity_obj_or_ids):
             """
                 setter for amenity_ids
             """
-            if amenity_obj and amenity_obj not in self.amenity_ids:
-                self.amenity_ids.append(amenity_obj.id)
+            # Handle loading from JSON (list of IDs)
+            if isinstance(amenity_obj_or_ids, list):
+                self.amenity_ids = amenity_obj_or_ids
+            # Handle adding single amenity object
+            elif amenity_obj_or_ids and hasattr(amenity_obj_or_ids, 'id') and amenity_obj_or_ids.id not in self.amenity_ids:
+                self.amenity_ids.append(amenity_obj_or_ids.id)
 
         @property
         def reviews(self):
@@ -81,7 +85,7 @@ class Place(BaseModel, Base):
                 getter for reviews list, i.e. reviews attribute of self
             """
             if len(self.review_ids) > 0:
-                return review_ids
+                return self.review_ids
             else:
                 return None
 
