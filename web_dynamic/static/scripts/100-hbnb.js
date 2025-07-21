@@ -1,7 +1,7 @@
 $('document').ready(function () {
   const api = 'http://' + window.location.hostname;
 
-  $.get(api + ':5001:/api/v1/status/', function (response) {
+  $.get(api + ':5000/api/v1/status/', function (response) {
     if (response.status === 'OK') {
       $('DIV#api_status').addClass('available');
     } else {
@@ -10,7 +10,7 @@ $('document').ready(function () {
   });
 
   $.ajax({
-    url: api + ':5001/api/v1/places_search/',
+    url: api + ':5000/api/v1/places_search/',
     type: 'POST',
     data: '{}',
     contentType: 'application/json',
@@ -64,7 +64,7 @@ $('document').ready(function () {
 
   $('BUTTON').click(function () {
     $.ajax({
-      url: api + ':5001/api/v1/places_search/',
+      url: api + ':5000/api/v1/places_search/',
       type: 'POST',
       data: JSON.stringify({
         'states': Object.keys(states),
@@ -80,12 +80,13 @@ $('document').ready(function () {
 
 function appendPlaces (data) {
   $('SECTION.places').empty();
+  $('SECTION.places').append('<H1>Places</H1>');
   $('SECTION.places').append(data.map(place => {
     return `<ARTICLE>
               <DIV class="title">
                 <H2>${place.name}</H2>
                   <DIV class="price_by_night">
-                    ${place.price_by_night}
+                    $${place.price_by_night}
                   </DIV>
                 </DIV>
                 <DIV class="information">

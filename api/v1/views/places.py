@@ -106,7 +106,7 @@ def places_search():
             p_amenities = None
             if STORAGE_TYPE == 'db' and p.amenities:
                 p_amenities = [a.id for a in p.amenities]
-            elif len(p.amenities) > 0:
+            elif hasattr(p, 'amenities') and p.amenities and len(p.amenities) > 0:
                 p_amenities = p.amenities
             if p_amenities and all([a in p_amenities for a in amenities]):
                 places_amenities.append(p)
