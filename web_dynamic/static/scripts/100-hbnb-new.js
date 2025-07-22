@@ -84,8 +84,8 @@ $("document").ready(function () {
 function appendPlaces(data) {
     $("SECTION.places").empty();
     $("SECTION.places").append("<H1>Places</H1>");
-    
-    data.forEach(function(place) {
+
+    data.forEach(function (place) {
         const placeCard = createSimplePlaceCard(place);
         $("SECTION.places").append(placeCard);
     });
@@ -95,7 +95,9 @@ function createSimplePlaceCard(place) {
     return `
         <ARTICLE class="place-card simple-card" data-place-id="${place.id}">
             <DIV class="place-image">
-                <IMG src="/static/images/icon_house.png" alt="${place.name}" class="place-photo">
+                <IMG src="/static/images/icon_house.png" alt="${
+                    place.name
+                }" class="place-photo">
                 <DIV class="price-overlay">$${place.price_by_night}/night</DIV>
             </DIV>
             
@@ -110,11 +112,16 @@ function createSimplePlaceCard(place) {
                         <I class="fa fa-bed"></I> ${place.number_rooms} bedrooms
                     </SPAN>
                     <SPAN class="basic-info">
-                        <I class="fa fa-bath"></I> ${place.number_bathrooms} bathrooms
+                        <I class="fa fa-bath"></I> ${
+                            place.number_bathrooms
+                        } bathrooms
                     </SPAN>
                 </DIV>
                 
-                <P class="place-description">${truncateText(place.description, 100)}</P>
+                <P class="place-description">${truncateText(
+                    place.description,
+                    100
+                )}</P>
             </DIV>
         </ARTICLE>
     `;
@@ -123,11 +130,11 @@ function createSimplePlaceCard(place) {
 // Helper functions
 function truncateText(text, maxLength) {
     if (text.length <= maxLength) return text;
-    return text.substring(0, maxLength) + '...';
+    return text.substring(0, maxLength) + "...";
 }
 
 // Event handlers
-$(document).on('click', '.place-card', function() {
-    const placeId = $(this).data('place-id');
+$(document).on("click", ".place-card", function () {
+    const placeId = $(this).data("place-id");
     window.location.href = `/100-hbnb/place/${placeId}`;
 });

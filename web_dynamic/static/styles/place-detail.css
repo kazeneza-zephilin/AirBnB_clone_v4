@@ -11,7 +11,7 @@
 }
 
 .back-btn {
-    background: #FF5A5F;
+    background: #ff5a5f;
     color: white;
     border: none;
     padding: 12px 20px;
@@ -25,7 +25,7 @@
 }
 
 .back-btn:hover {
-    background: #E00007;
+    background: #e00007;
 }
 
 .loading-spinner {
@@ -37,7 +37,7 @@
 .loading-spinner i {
     display: block;
     margin-bottom: 16px;
-    color: #FF5A5F;
+    color: #ff5a5f;
 }
 
 /* Place Detail Layout */
@@ -45,7 +45,7 @@
     background: white;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
 }
 
 .place-hero {
@@ -66,7 +66,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.6));
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
     color: white;
     padding: 40px 30px 30px;
 }
@@ -96,7 +96,7 @@
     align-items: start;
     margin-bottom: 30px;
     padding-bottom: 30px;
-    border-bottom: 1px solid #EEEEEE;
+    border-bottom: 1px solid #eeeeee;
 }
 
 .place-info h2 {
@@ -120,7 +120,7 @@
 }
 
 .basic-stat i {
-    color: #FF5A5F;
+    color: #ff5a5f;
     width: 20px;
 }
 
@@ -131,7 +131,7 @@
 }
 
 .stars {
-    color: #FFD700;
+    color: #ffd700;
     font-size: 18px;
 }
 
@@ -211,7 +211,7 @@
 }
 
 .amenity-item i {
-    color: #00A699;
+    color: #00a699;
     width: 16px;
 }
 
@@ -270,7 +270,7 @@
 }
 
 .rating-stars {
-    color: #FFD700;
+    color: #ffd700;
     font-size: 16px;
     margin: 4px 0;
 }
@@ -290,7 +290,7 @@
 .review-item {
     padding: 20px;
     background: white;
-    border: 1px solid #EEEEEE;
+    border: 1px solid #eeeeee;
     border-radius: 12px;
 }
 
@@ -341,47 +341,47 @@
     .container {
         padding: 15px;
     }
-    
+
     .place-hero {
         height: 250px;
     }
-    
+
     .place-hero-overlay {
         padding: 20px 20px 15px;
     }
-    
+
     .place-title {
         font-size: 24px;
     }
-    
+
     .place-location {
         font-size: 16px;
     }
-    
+
     .place-content {
         padding: 20px;
     }
-    
+
     .place-header {
         grid-template-columns: 1fr;
         gap: 20px;
         text-align: center;
     }
-    
+
     .place-grid {
         grid-template-columns: 1fr;
         gap: 30px;
     }
-    
+
     .place-basics {
         flex-direction: column;
         gap: 12px;
     }
-    
+
     .amenities-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .reviews-summary {
         flex-direction: column;
         text-align: center;
@@ -391,7 +391,7 @@
 /* Error state */
 .error-message {
     text-align: center;
-    color: #FF5A5F;
+    color: #ff5a5f;
     padding: 60px 20px;
 }
 

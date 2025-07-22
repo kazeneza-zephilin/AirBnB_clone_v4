@@ -113,11 +113,25 @@ setup_environment() {
         print_warning "requirements.txt not found, skipping dependency installation"
     fi
     
-    # Setup sample data
+    # Setup sample data (only if not already populated)
     if [ -f "populate_sample_data.py" ]; then
-        print_info "Setting up sample data..."
-        python3 populate_sample_data.py
-        print_success "Sample data populated"
+        if [ -f "dev/file.json" ]; then
+            # Check if data already exists
+            DATA_SIZE=$(wc -c < "dev/file.json" 2>/dev/null || echo "0")
+            if [ "$DATA_SIZE" -gt 1000 ]; then
+                print_info "Sample data already exists (file size: ${DATA_SIZE} bytes)"
+                print_warning "Skipping data population to avoid duplicates"
+                print_info "To repopulate, run: HBNB_TYPE_STORAGE=file python3 populate_sample_data.py"
+            else
+                print_info "Setting up sample data..."
+                HBNB_TYPE_STORAGE=file python3 populate_sample_data.py
+                print_success "Sample data populated"
+            fi
+        else
+            print_info "Setting up sample data..."
+            HBNB_TYPE_STORAGE=file python3 populate_sample_data.py
+            print_success "Sample data populated"
+        fi
     else
         print_warning "populate_sample_data.py not found, skipping data setup"
     fi

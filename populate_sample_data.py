@@ -23,52 +23,73 @@ from models.review import Review
 from datetime import datetime
 
 
+def get_or_create_state(name):
+    """Get existing state or create new one if it doesn't exist"""
+    all_states = storage.all(State)
+    for state in all_states.values():
+        if state.name == name:
+            return state
+    
+    # Create new state if not found
+    new_state = State(name=name)
+    new_state.save()
+    return new_state
+
+
+def get_or_create_city(name, state_id):
+    """Get existing city or create new one if it doesn't exist"""
+    all_cities = storage.all(City)
+    for city in all_cities.values():
+        if city.name == name and city.state_id == state_id:
+            return city
+    
+    # Create new city if not found
+    new_city = City(name=name, state_id=state_id)
+    new_city.save()
+    return new_city
+
+
+def get_or_create_amenity(name):
+    """Get existing amenity or create new one if it doesn't exist"""
+    all_amenities = storage.all(Amenity)
+    for amenity in all_amenities.values():
+        if amenity.name == name:
+            return amenity
+    
+    # Create new amenity if not found
+    new_amenity = Amenity(name=name)
+    new_amenity.save()
+    return new_amenity
+
+
 def create_states_and_cities():
     """Create states and their major cities"""
     print("Creating States and Cities...")
     
     # California
-    california = State(name="California")
-    california.save()
+    california = get_or_create_state("California")
     
-    sf = City(name="San Francisco", state_id=california.id)
-    sf.save()
-    
-    la = City(name="Los Angeles", state_id=california.id)
-    la.save()
-    
-    san_diego = City(name="San Diego", state_id=california.id)
-    san_diego.save()
+    sf = get_or_create_city("San Francisco", california.id)
+    la = get_or_create_city("Los Angeles", california.id)
+    san_diego = get_or_create_city("San Diego", california.id)
     
     # New York
-    new_york = State(name="New York")
-    new_york.save()
+    new_york = get_or_create_state("New York")
     
-    nyc = City(name="New York City", state_id=new_york.id)
-    nyc.save()
-    
-    buffalo = City(name="Buffalo", state_id=new_york.id)
-    buffalo.save()
+    nyc = get_or_create_city("New York City", new_york.id)
+    buffalo = get_or_create_city("Buffalo", new_york.id)
     
     # Florida
-    florida = State(name="Florida")
-    florida.save()
+    florida = get_or_create_state("Florida")
     
-    miami = City(name="Miami", state_id=florida.id)
-    miami.save()
-    
-    orlando = City(name="Orlando", state_id=florida.id)
-    orlando.save()
+    miami = get_or_create_city("Miami", florida.id)
+    orlando = get_or_create_city("Orlando", florida.id)
     
     # Texas
-    texas = State(name="Texas")
-    texas.save()
+    texas = get_or_create_state("Texas")
     
-    austin = City(name="Austin", state_id=texas.id)
-    austin.save()
-    
-    houston = City(name="Houston", state_id=texas.id)
-    houston.save()
+    austin = get_or_create_city("Austin", texas.id)
+    houston = get_or_create_city("Houston", texas.id)
     
     return {
         'states': [california, new_york, florida, texas],
@@ -154,8 +175,7 @@ def create_amenities():
     
     amenities = []
     for amenity_name in amenities_data:
-        amenity = Amenity(name=amenity_name)
-        amenity.save()
+        amenity = get_or_create_amenity(amenity_name)
         amenities.append(amenity)
     
     return amenities
@@ -465,6 +485,16 @@ def main():
     """Main function to populate all sample data"""
     print("Starting AirBnB Clone Sample Data Population...")
     print("This will create comprehensive sample data to demonstrate all features.\n")
+    
+    # Check if data already exists
+    existing_states = storage.all('State')
+    existing_amenities = storage.all('Amenity')
+    
+    if existing_states or existing_amenities:
+        print(f"Found existing data:")
+        print(f"  States: {len(existing_states)}")
+        print(f"  Amenities: {len(existing_amenities)}")
+        print("Script will check for existing items and avoid creating duplicates.\n")
     
     # Create all sample data
     locations = create_states_and_cities()
