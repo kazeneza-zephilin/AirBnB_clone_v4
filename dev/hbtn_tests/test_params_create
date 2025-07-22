@@ -1,0 +1,75 @@
+#!/usr/bin/python3
+"""
+Test script for parameter creation functionality
+"""
+
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.user import User
+from models.review import Review
+from models import storage
+
+
+def test_create_params():
+    """Test creating objects with various parameters"""
+    
+    print("Testing parameter creation...")
+    
+    # Test State creation
+    state = State(name="Test State")
+    print(f"Created State: {state.name} (ID: {state.id})")
+    
+    # Test City creation
+    city = City(name="Test City", state_id=state.id)
+    print(f"Created City: {city.name} in state {state.name} (ID: {city.id})")
+    
+    # Test User creation
+    user = User(
+        email="test@example.com",
+        password="password123",
+        first_name="Test",
+        last_name="User"
+    )
+    print(f"Created User: {user.first_name} {user.last_name} (ID: {user.id})")
+    
+    # Test Amenity creation
+    amenity = Amenity(name="Test Amenity")
+    print(f"Created Amenity: {amenity.name} (ID: {amenity.id})")
+    
+    # Test Place creation
+    place = Place(
+        city_id=city.id,
+        user_id=user.id,
+        name="Test Place",
+        description="A test place for testing",
+        number_rooms=2,
+        number_bathrooms=1,
+        max_guest=4,
+        price_by_night=100
+    )
+    print(f"Created Place: {place.name} (ID: {place.id})")
+    
+    # Test Review creation
+    review = Review(
+        place_id=place.id,
+        user_id=user.id,
+        text="This is a test review"
+    )
+    print(f"Created Review: {review.text[:30]}... (ID: {review.id})")
+    
+    # Save all objects
+    state.save()
+    city.save()
+    user.save()
+    amenity.save()
+    place.save()
+    review.save()
+    
+    print("\nAll test objects created and saved successfully!")
+    print("\nTest completed. Check storage for created objects.")
+
+
+if __name__ == "__main__":
+    test_create_params()
